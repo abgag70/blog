@@ -29,8 +29,9 @@ This gives the following on my platform
  x = [0.9999999994699013, 0.999999999065295]
 y = 1.8558415650416274e-18
 ```
+<br>
 
-### Compiling to WASM
+#### Compiling to WASM
 
 Dlib is written in C++ and offers a Python API. I've been f-ing around WASM and Emscripten lately and wanted a small and interesting project to learn so I decided to give a shot at compiling Dlib to WASM.
 
