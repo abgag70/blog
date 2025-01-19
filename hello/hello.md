@@ -2,7 +2,10 @@ Helloe!! :)
 
 #### Ok !
 
-```
-Travaillez-vouz ici ??
+```python
+print('Henlo !!)
+
+for i in [0,0,0]:
+    say()
 ```
 
