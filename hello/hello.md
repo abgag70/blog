@@ -1,4 +1,4 @@
-## [Compiling DLib's MaxLIPO+TR global optimization algorithm to WASM](/)
+## [Compiling DLib's MaxLIPO+TR global optimization algorithm to WASM]()
 <sub>January 18th 2024 </sub>
 <br>
 
