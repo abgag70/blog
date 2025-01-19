@@ -58,14 +58,10 @@
                 .then(markdownText => {
                     const html = marked.parse(markdownText);
                     articleElement.innerHTML = html;
+                    hljs.highlightAll();
                 })
                 .catch(error => console.error('Error fetching article:', error));
-            hljs.highlightAll();
-            console.log('ssss');
-            console.log('ssss');
-            console.log('ssss');
-            console.log('ssss');
-            console.log('ssss');
+            
         </script>
     </body>
 </html>
