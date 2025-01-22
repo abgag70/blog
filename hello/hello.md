@@ -6,7 +6,7 @@ A few while ago I came across a great [post](https://blog.dlib.net/2017/12/a-glo
 
 If you're not familiar with it, it is implemented through the find_min_global function of Dlib and allows the programmer to minimize an objective function. It requires no hyperparameters and only takes in the function to be minimized, upper and lower bounds and a maximum number of function calls.
 
-Building on the example in the article above, we can test the find_min_global function with the following. Dlib is installed by default in Colab so you can try it quickly :
+Building on the example in the article above, we can test the find_min_global function in Python with the following code. Dlib is installed by default in Colab so you can try it out quickly.
 
 ```python
 import dlib
