@@ -35,9 +35,6 @@ y = 1.8558415650416274e-18
 
 Dlib is written in C++ and offers a Python API. I've been f-ing around WASM and Emscripten lately and wanted a small and interesting project to learn so I decided to give a shot at compiling Dlib to WASM.
 
-<<<<<<< HEAD
-The real challenge was porting a Javascript function to Emscripten to be minimized from there.
-=======
 First make sure you have [Emscripten installed](https://emscripten.org/docs/getting_started/downloads.html) with.
 
 ```bash
@@ -130,4 +127,3 @@ EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
     function("max_lipo_plus_tr", &max_lipo_plus_tr);
 }
 ```
->>>>>>> e8f3941 (ok)
