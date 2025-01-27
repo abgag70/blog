@@ -31,6 +31,36 @@ y = 1.8558415650416274e-18
 ```
 <br>
 
+#### Interfacing with Javascript
+
+The goal is to create a function (called maxLipoPlusTr) that will be able to minimize any objective Javascript function that returns a numerical value.
+
+Here's what we want it to look like :
+
+```js
+import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
+
+// Rosenbrock function for 3D space, is minimized at x0 = 1, x1 = 1, x2 = 1
+function rosenbrock3D(x0, x1, x2) {
+    return 100 * ((x1 - x0**2)**2 + (x2 - x1**2)**2) + (1 - x0)**2 + (1 - x1)**2;
+}
+
+const lower_bounds = [-100, -100, -100];
+const upper_bounds = [100, 100, 100];
+const max_calls = 300;
+
+let result = await maxLipoPlusTr(rosenbrock3D, lower_bounds, upper_bounds, max_calls);
+
+console.log(result);
+// This gives :
+// {
+//   "x": [0.9999998222686982, 0.999999575414733, 0.9999992156860394], 
+//   "y": 0.00000000000091659844
+// }
+```
+
+
+
 #### Compiling to WASM
 
 Dlib is written in C++ and offers a Python API. I've been f-ing around WASM and Emscripten lately and wanted a small and interesting project to learn so I decided to give a shot at compiling Dlib to WASM.
