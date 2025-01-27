@@ -59,7 +59,7 @@ console.log(result);
 
 Under the hood, maxLipoPlusTr loads the WASM module, wraps the input function inside an object and sends it to the WASM environnement to be minimized inside DLib's find_min_global function.
 
-Here's **max-lipo-plus-tr.js**
+Here's ```max-lipo-plus-tr.js```
 
 ```js
 import createMaxLipoTrPlusModule from './find_min_global_o3.js'
@@ -100,9 +100,7 @@ class JsFunction {
     }
 }
 ```
-This setArg method allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. setArg is called from the C++ code using Emscripten.
-
-We can mirror JsFunciton behavior 
+The setArg method allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. setArg is called from the C++ code using Emscripten.
 
 
 #### Compiling to WASM
