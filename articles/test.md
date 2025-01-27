@@ -33,7 +33,7 @@ y = 1.8558415650416274e-18
 
 #### Interfacing with Javascript
 
-The goal is to create a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like :
+Since the goal is to reproduce this behavior in Javascript, we start by creating a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like.
 
 ```js
 import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
@@ -84,7 +84,7 @@ export async function maxLipoPlusTr(theFunction,
 }
 ```
 
-The JsFunction object wraps up the function to be minimized.
+The ```JsFunction``` object wraps up the function to be minimized.
 
 ```js
 class JsFunction {
@@ -100,7 +100,7 @@ class JsFunction {
     }
 }
 ```
-The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a JS ```TypedArray``` uses contiguous memory allocation by default.
+The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a Javascript ```TypedArray``` uses contiguous memory allocation by default.
 
 
 #### Compiling to WASM
