@@ -57,13 +57,52 @@ console.log(result);
 // }
 ```
 
-Under the hood, maxLipoPlusTr() 1) loads the WASM module, 2) wraps the input function inside an object and 3) sends it to the WASM environnement to be minimized inside DLib's find_min_global().
+Under the hood, maxLipoPlusTr loads the WASM module, wraps the input function inside an object and sends it to the WASM environnement to be minimized inside DLib's find_min_global function.
 
 Here's **max-lipo-plus-tr.js**
 
 ```js
+import createMaxLipoTrPlusModule from './find_min_global_o3.js'
 
+var Module = null;
+
+export async function maxLipoPlusTr(theFunction,
+                                    lower_bounds,
+                                    upper_bounds,
+                                    max_calls) { 
+
+    if (!Module) { // load Module if not loaded yet
+        Module = await createMaxLipoTrPlusModule();
+    }
+
+    // Create an instance of JsFunction with the Rosenbrock function
+    const jsFunc = new JsFunction(theFunction);
+
+    const result = await Module.max_lipo_plus_tr(jsFunc, lower_bounds, upper_bounds, max_calls);
+
+    return { x: result.x, y: result.y };
+}
 ```
+
+The JsFunction object wraps up the function to be minimized.
+
+```js
+class JsFunction {
+    constructor(func) {
+        this.func = func;
+        this.args = new Float32Array(func.length);
+    }
+    bang() {
+        return this.func(...this.args); // unpack args Array and call function
+    }
+    setArg(i, arg) {
+        this.args[i] = arg;
+    }
+}
+```
+This setArg method allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. setArg is called from the C++ code using Emscripten.
+
+We can mirror JsFunciton behavior 
 
 
 #### Compiling to WASM
