@@ -57,6 +57,13 @@ console.log(result);
 // }
 ```
 
+Under the hood, maxLipoPlusTr() 1) loads the WASM module, 2) wraps the input function inside an object and 3) sends it to the WASM environnement to be minimized inside DLib's find_min_global().
+
+Here's **max-lipo-plus-tr.js**
+
+```js
+
+```
 
 
 #### Compiling to WASM
