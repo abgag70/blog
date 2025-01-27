@@ -100,7 +100,7 @@ class JsFunction {
     }
 }
 ```
-The setArg method allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. setArg is called from the C++ code using Emscripten.
+The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a JS ```TypedArray``` uses contiguous memory allocation by default.
 
 
 #### Compiling to WASM
