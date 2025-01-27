@@ -33,9 +33,7 @@ y = 1.8558415650416274e-18
 
 #### Interfacing with Javascript
 
-The goal is to create a function (called maxLipoPlusTr) that will be able to minimize any objective Javascript function that returns a numerical value.
-
-Here's what we want it to look like :
+The goal is to create a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like :
 
 ```js
 import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
