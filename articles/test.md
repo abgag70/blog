@@ -84,7 +84,7 @@ export async function maxLipoPlusTr(theFunction,
 }
 ```
 
-Notice the function is passed as construvtor into a ```JsFunction``` object. This object wraps up the function to be minimized.
+Notice the minimized function is passed as constructor into a ```JsFunction``` object. This object wraps up the function to be minimized.
 
 ```js
 class JsFunction {
