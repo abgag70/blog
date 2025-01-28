@@ -29,7 +29,6 @@ This gives the following on my platform.
 x = [0.9999999994699013, 0.999999999065295]
 y = 1.8558415650416274e-18
 ```
-<br>
 
 #### Interfacing with Javascript
 
