@@ -1,4 +1,4 @@
-## [Compiling DLib's MaxLIPO+TR global optimization algorithm to WASM]()
+## [Optimizing a Javascript with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM]()
 <sub>January 18th 2024 </sub>
 <br>
 
@@ -30,9 +30,11 @@ x = [0.9999999994699013, 0.999999999065295]
 y = 1.8558415650416274e-18
 ```
 
+Dlib is written in C++ and offers a Python API. Our goal is to reproduce this behavior in Javascript and be able to minimize a similar function directly inside a browser environnement. For this, a small C++ wrapper around ```dlib::find_min_global``` does the job, allowing us to call a Javascript function directly from the WASM environnement.
+
 #### Interfacing with Javascript
 
-Since the goal is to reproduce this behavior in Javascript, we start by creating a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like.
+But first, since the goal is to reproduce this behavior in Javascript, we start by creating a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like.
 
 ```js
 import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
@@ -105,8 +107,6 @@ The ```setArg``` method, called from the C++ code using Emscripten, allows us to
 
 
 #### Compiling to WASM
-
-Dlib is written in C++ and offers a Python API. I've been f-ing around WASM and Emscripten lately and wanted a small and interesting project to learn so I decided to give a shot at compiling Dlib to WASM.
 
 First make sure you have [Emscripten installed](https://emscripten.org/docs/getting_started/downloads.html) with.
 
