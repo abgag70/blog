@@ -33,10 +33,13 @@ This gives the following on my platform
 y = 1.8558415650416274e-18
 ```
 <br>
+<br>
 
 #### Interfacing with Javascript
+<br>
 
 Since the goal is to reproduce this behavior in Javascript, we start by creating a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like.
+<br>
 
 ```js
 import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
@@ -59,10 +62,11 @@ console.log(result);
 //   "y": 0.00000000000091659844
 // }
 ```
-
+<br>
 Under the hood, maxLipoPlusTr loads the WASM module, wraps the input function inside an object and sends it to the WASM environnement to be minimized inside DLib's find_min_global function.
 
 Here's ```max-lipo-plus-tr.js```
+<br>
 
 ```js
 import createMaxLipoTrPlusModule from './find_min_global_o3.js'
@@ -88,6 +92,7 @@ export async function maxLipoPlusTr(theFunction,
 ```
 
 The ```JsFunction``` object wraps up the function to be minimized.
+<br>
 
 ```js
 class JsFunction {
@@ -103,10 +108,13 @@ class JsFunction {
     }
 }
 ```
+<br>
+
 The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a Javascript ```TypedArray``` uses contiguous memory allocation by default.
 
 
 #### Compiling to WASM
+<br>
 
 Dlib is written in C++ and offers a Python API. I've been f-ing around WASM and Emscripten lately and wanted a small and interesting project to learn so I decided to give a shot at compiling Dlib to WASM.
 
