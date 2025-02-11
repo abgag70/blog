@@ -73,9 +73,9 @@ import createMaxLipoTrPlusModule from './find_min_global_o3.js'
 var Module = null;
 
 export async function maxLipoPlusTr(theFunction,
-                                    lower_bounds,
-                                    upper_bounds,
-                                    max_calls) { 
+                                    lowerBounds,
+                                    upperBounds,
+                                    maxCalls) { 
 
     if (!Module) { // load Module if not loaded yet
         Module = await createMaxLipoTrPlusModule();
@@ -84,7 +84,7 @@ export async function maxLipoPlusTr(theFunction,
     // Create an instance of JsFunction with the Rosenbrock function
     const jsFunc = new JsFunction(theFunction);
 
-    const result = await Module.max_lipo_plus_tr(jsFunc, lower_bounds, upper_bounds, max_calls);
+    const result = await Module.max_lipo_plus_tr(jsFunc, lowerBounds, upperBounds, max_Calls);
 
     return { x: result.x, y: result.y };
 }
