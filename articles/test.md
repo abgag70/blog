@@ -44,11 +44,11 @@ function rosenbrock3D(x0, x1, x2) {
     return 100 * ((x1 - x0**2)**2 + (x2 - x1**2)**2) + (1 - x0)**2 + (1 - x1)**2;
 }
 
-const lower_bounds = [-100, -100, -100];
-const upper_bounds = [100, 100, 100];
-const max_calls = 300;
+const lowerBounds = [-100, -100, -100];
+const upperBounds = [100, 100, 100];
+const maxCalls = 300;
 
-let result = await maxLipoPlusTr(rosenbrock3D, lower_bounds, upper_bounds, max_calls);
+let result = await maxLipoPlusTr(rosenbrock3D, lowerBounds, upperBounds, maxCalls);
 
 console.log(result);
 
