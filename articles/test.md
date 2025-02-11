@@ -32,7 +32,7 @@ y = 1.8558415650416274e-18
 
 Dlib is written in C++ and offers a Python API. Our goal is to reproduce this behavior in Javascript and be able to minimize a similar function directly inside a browser environnement. For this, a small C++ wrapper around ```dlib::find_min_global``` does the job, allowing us to call a Javascript function directly from the WASM environnement.
 
-#### Interfacing with Javascript
+#### Setting up the Javascript interface
 
 But first, since the goal is to reproduce this behavior in Javascript, we start by creating a function called maxLipoPlusTr that will be able to minimize any objective Javascript function that returns a numerical value. Here's what we want it to look like.
 
@@ -51,11 +51,16 @@ const max_calls = 300;
 let result = await maxLipoPlusTr(rosenbrock3D, lower_bounds, upper_bounds, max_calls);
 
 console.log(result);
-// This gives :
-// {
-//   "x": [0.9999998222686982, 0.999999575414733, 0.9999992156860394], 
-//   "y": 0.00000000000091659844
-// }
+
+```
+
+The value of  ```result``` should give us something like the following, where ```x``` is an array of our minimized arguments and ```y``` is the minima found by the algorithm.
+
+```
+ {
+   "x": [0.9999998222686982, 0.999999575414733, 0.9999992156860394], 
+   "y": 0.00000000000091659844
+ }
 ```
 
 Under the hood, the maxLipoPlusTr function loads the WASM module, wraps the input function inside an object and sends it to the WASM environnement to be minimized inside DLib's find_min_global function. 
@@ -104,6 +109,11 @@ class JsFunction {
 
 The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a Javascript ```TypedArray``` uses contiguous memory allocation by default.
 
+#### Writing a C++ wrapper
+
+Once our Javascript is set up, we create a C++ wrapper to interact with dlib. It's convenient to place it inside dlib/.. folder so it's all in one place once you compile it.
+
+Create the ```find_min_global_wrapper.cpp``` file and insert the folloqing code into it
 
 
 #### Compiling to WASM
@@ -165,8 +175,11 @@ val max_lipo_plus_tr(val jsFunction,
     std::function<double(const dlib::matrix<double, 0, 1>&)> func;
 
     func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
-        val args_js_array = dlib_mat_to_js_array(vec);
-        return jsFunction.call<double>("bang", args_js_array);
+        // Push each arg into the js args array
+        for (std::size_t i = 0; i < vec.nr(); ++i) {
+            jsFunction.call<void>("setArg", i, vec(i));
+        }
+        return jsFunction.call<double>("bang");
     };
 
     // Convert vector bounds to dlib matrices
@@ -177,7 +190,7 @@ val max_lipo_plus_tr(val jsFunction,
     auto result = dlib::find_min_global(func, lb, ub, max_function_calls(max_calls));
 
     val output_js_object = val::object();
-    val x_js_array = dlib_mat_to_js_array(result.x); // val::array();
+    val x_js_array = dlib_mat_to_js_array(result.x);
 
     // Set 'x' attribute in the JavaScript object
     output_js_object.set("x", x_js_array);
