@@ -111,31 +111,9 @@ The ```setArg``` method, called from the C++ code using Emscripten, allows us to
 
 #### Writing a C++ wrapper
 
-Once our Javascript is set up, we create a C++ wrapper to interact with dlib. It's convenient to place it inside dlib/.. folder so it's all in one place once you compile it.
+Once our Javascript is set up, we create a C++ wrapper to interact with dlib and compile it using Emscripten to make it accessible inside a web environnement.
 
-Create the ```find_min_global_wrapper.cpp``` file and insert the folloqing code into it
-
-
-#### Compiling to WASM
-
-First make sure you have [Emscripten installed](https://emscripten.org/docs/getting_started/downloads.html) with.
-
-```bash
-emcc --version
-```
-
-⚠️ I'm currently using Emscripten 3.1.74 because of a [compiling issue](https://github.com/davisking/dlib/issues/3045) with version 4.0.0.
-
-Let's start by cloning the latest DLib and cd-ing into the directory
-
-```bash
-git clone https://github.com/davisking/dlib.git
-cd dlib
-```
-
-The real challenge was porting a Javascript function to Emscripten to be minimized from there. For this I wrote a C++ wrapper that can interface with a Javascript function inside the environnement through Emscripten.
-
-Create this **find_min_global_wrapper.cpp** file inside the dlib/ folder.
+Here the ```find_min_global_wrapper.cpp``` file.
 
 ```cpp
 #include <dlib/global_optimization.h>
@@ -213,3 +191,30 @@ EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
     function("max_lipo_plus_tr", &max_lipo_plus_tr);
 }
 ```
+
+#### Compiling to WASM
+
+To compile ```find_min_global.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice we deactivate multi-threading here as it's best not to have it in our context, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```, just make sure to set the right CORS policy.
+
+```
+emcc -O3 find_min_global_wrapper.cpp dlib/global_function_search.o dlib/thread_pool_extension.o -I./ -o find_min_global_o3.js \
+    -s MODULARIZE=1 \
+    -s EXPORT_NAME="createMaxLipoTrPlusModule" \
+    -s EXPORT_ES6=1 \
+    -s ALLOW_MEMORY_GROWTH=1 \
+    -s ALLOW_TABLE_GROWTH=1 \
+    -s INITIAL_MEMORY=131072 \
+    -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']" \
+    --bind
+```
+And that's it !
+
+You can try it out (here)[https://dany-demise.github.io/max-lipo-plus-tr]
+
+⚠️ I'm currently using Emscripten 3.1.74 because of a [compiling issue](https://github.com/davisking/dlib/issues/3045) with version 4.0.0.
+
+Have fun ! 
+
+<sub>Programming is amazing and we are lucky to be able to do it everyday ❤️</sub>
+
+<br>
