@@ -194,7 +194,7 @@ EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
 
 #### Compiling to WASM
 
-To compile ```find_min_global.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice we deactivate multi-threading here as it's best not to have it in our context, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```, just make sure to set the right CORS policy.
+To compile ```find_min_global.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice multi-threading is deactivated by default here as it's best not to have it in our context, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```, just make sure to set the right CORS policy.
 
 ```
 emcc -O3 find_min_global_wrapper.cpp dlib/global_function_search.o dlib/thread_pool_extension.o -I./ -o find_min_global_o3.js \
@@ -207,9 +207,11 @@ emcc -O3 find_min_global_wrapper.cpp dlib/global_function_search.o dlib/thread_p
     -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']" \
     --bind
 ```
+Which should output a ```find_min_global_o3.js``` and ```find_min_global_o3.wasm```, to include both inside your project.
+
 And that's it !
 
-You can try it out (here)[https://dany-demise.github.io/max-lipo-plus-tr]
+You can try it out [here](https://dany-demise.github.io/max-lipo-plus-tr) and get the code [here](https://github.com/dany-demise/max-lipo-plus-tr-js).
 
 ⚠️ I'm currently using Emscripten 3.1.74 because of a [compiling issue](https://github.com/davisking/dlib/issues/3045) with version 4.0.0.
 
