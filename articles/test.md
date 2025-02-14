@@ -215,8 +215,6 @@ You can try it out [here](https://dany-demise.github.io/max-lipo-plus-tr-js) and
 
 ⚠️ I'm currently using Emscripten 3.1.74 because of a [compiling issue](https://github.com/davisking/dlib/issues/3045) with version 4.0.0.
 
-Have fun ! 
 
-<sub>Programming is amazing and we are lucky to be able to do it everyday ❤️</sub>
 
 <br>
