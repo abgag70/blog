@@ -185,7 +185,7 @@ EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
 
 #### Compiling to WASM
 
-To compile ```find_min_global_wrapper.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice multi-threading is deactivated by default here as it's best not to have it in our context, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```, just make sure to set the right CORS policy.
+To compile ```find_min_global_wrapper.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice multi-threading is deactivated by default here as it's best not to have it in our context, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```, just make sure to set the right CORS policy because in WASM [each thread is spawned inside a web worker](https://web.dev/articles/webassembly-threads?hl=en).
 
 ```
 emcc -O3 find_min_global_wrapper.cpp dlib/global_function_search.o dlib/thread_pool_extension.o -I./ -o find_min_global_o3.js \
