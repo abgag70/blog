@@ -1,5 +1,5 @@
 ## [Optimizing a Javascript function with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM]()
-<sub>January 18th 2024 </sub>
+<sub>January 18th 2025 </sub>
 <br>
 
 A few while ago I came across a great [article](https://blog.dlib.net/2017/12/a-global-optimization-algorithm-worth.html) regarding the MaxLIPO+TR algorithm implemented inside DLib's library. I was really excited the first time I read this post. I was amazed by the power of the algorithm and yet how simple it was.
