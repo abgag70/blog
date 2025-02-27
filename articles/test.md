@@ -34,7 +34,7 @@ Dlib is written in C++ and offers a Python API. Our goal is to reproduce this be
 
 #### Setting up the Javascript interface
 
-But first, since the goal is to reproduce this behavior in Javascript, we start by creating a function called ```maxLipoPlusTr``` that will be able to minimize any numerical Javascript function (i.e. that takes in and returns a numerical value. Here's what we want it to look like.
+But first, since the goal is to reproduce this behavior in Javascript, we start by creating a function called ```maxLipoPlusTr``` that will be able to minimize any numerical Javascript function (i.e. that takes in and returns a numerical value). Here's what we want it to look like.
 
 ```js
 import { maxLipoPlusTr } from "./max-lipo-plus-tr.js"
