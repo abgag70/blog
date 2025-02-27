@@ -4,7 +4,7 @@
 
 A few months ago I came across a great [article](https://blog.dlib.net/2017/12/a-global-optimization-algorithm-worth.html) regarding the MaxLIPO+TR algorithm implemented inside DLib's library. I was really excited the first time I read this post. I was amazed by the power of the algorithm and yet how simple it was.
 
-If you're not familiar with it, it is implemented through the find_min_global function of Dlib and allows you to minimize an objective function. It requires no hyperparameters and only takes in the function to be minimized, upper and lower bounds and a maximum number of function calls.
+If you're not familiar with it, it is implemented through the ```find_min_global``` function of Dlib and allows you to minimize an objective function. It requires no hyperparameters and only takes in the function to be minimized, upper and lower bounds and a maximum number of function calls.
 
 Building on the example in the article above, we can test the find_min_global function in Python with the following code. Dlib is installed by default in Colab so you can try it out quickly.
 
@@ -90,7 +90,7 @@ export async function maxLipoPlusTr(theFunction,
 }
 ```
 
-Notice the minimized function is wrapped into a ```JsFunction``` object. It's this object that is then passed into the max_lipo_tr call.
+Notice the minimized function is wrapped into a ```JsFunction``` object. It's this object that is then passed into the ```max_lipo_plus_tr``` call.
 
 ```js
 class JsFunction {
