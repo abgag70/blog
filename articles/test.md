@@ -23,11 +23,11 @@ x,y = dlib.find_min_global(
 )
 ```
 
-This gives the following on my platform.
+Which should give you something like the following.
 ­­­
 ```
 x = [0.9999999994699013, 0.999999999065295]
-y = 1.8558415650416274e-18
+y = 0.00000000000000000018
 ```
 
 Dlib is written in C++ and offers a Python API. Our goal is to reproduce this behavior in Javascript and be able to minimize a similar function directly inside a browser environnement. For this, a small C++ wrapper around ```dlib::find_min_global``` does the job, allowing us to call a Javascript function directly from the WASM environnement.
