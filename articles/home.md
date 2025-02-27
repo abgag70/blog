@@ -1,5 +1,6 @@
-### [Optimizing a Javascript function with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM](https://dany-demise.github.io/blog/optimizing-a-javascript-function-with-dlibs-maxlipotr-global-optimization-algorithm-using-emscripten-and-wasm)
+## [Optimizing a Javascript function with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM 📈](https://dany-demise.github.io/blog/optimizing-a-javascript-function-with-dlibs-maxlipotr-global-optimization-algorithm-using-emscripten-and-wasm)
 
 ---
 
+[Convert any RAW image to JPEG (the fastest ⚡ and free-est 💲)](https://dany-demise.github.io/any-raw-to-jpg)
 
