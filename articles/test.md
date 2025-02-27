@@ -23,7 +23,7 @@ x,y = dlib.find_min_global(
 )
 ```
 
-Which should give you something like the following.
+Which should give you something like the following, where ```x``` is an array of our minimized arguments and ```y``` is the minima found by the algorithm.
 ­­­
 ```
 x = [0.9999999994699013, 0.999999999065295]
@@ -54,7 +54,7 @@ console.log(result);
 
 ```
 
-The value of  ```result``` should give us something like the following, where ```x``` is an array of our minimized arguments and ```y``` is the minima found by the algorithm.
+The value of  ```result``` should give us something like the following, where again ```x``` is an array of our minimized arguments and ```y``` is the minima found by the algorithm.
 
 ```
  {
