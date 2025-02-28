@@ -6,7 +6,7 @@
 ---
 <br>
 
-## [Convert any RAW image to JPEG (the fastest ⚡ and free-est 💲)](https://dany-demise.github.io/any-raw-to-jpg)
+## [Convert any RAW image to JPEG (the fastest ⚡)](https://dany-demise.github.io/any-raw-to-jpg)
 <br>
 
 
