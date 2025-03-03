@@ -129,7 +129,7 @@ using namespace dlib;
 emscripten::val dlib_mat_to_js_array(const dlib::matrix<double, 0, 1>& vec) {
     emscripten::val js_array = emscripten::val::array();
     for (std::size_t i = 0; i < vec.nr(); ++i) {
-        js_array.call<void>("push", vec(i));  // Push each element into the js array
+        js_array.call<void>("push", vec(i));
     }
     return js_array;
 }
@@ -138,29 +138,28 @@ emscripten::val dlib_mat_to_js_array(const dlib::matrix<double, 0, 1>& vec) {
 dlib::matrix<double, 0, 1> js_array_to_dlib_mat(const emscripten::val& js_array) {
     dlib::matrix<double, 0, 1> vec(js_array["length"].as<std::size_t>());
     for (std::size_t i = 0; i < vec.nr(); ++i) {
-        vec(i) = js_array[i].as<double>();  // Get each element from the JS array and assign to matrix
+        vec(i) = js_array[i].as<double>();
     }
     return vec;
 }
 
 emscripten::val max_lipo_plus_tr(val jsFunction,
-                     emscripten::val lower_bounds, // as Javascript Arrays
+                     emscripten::val lower_bounds, // bounds are Javascript Arrays
                      emscripten::val upper_bounds,
                      size_t max_calls) {
     std::function<double(const dlib::matrix<double, 0, 1>&)> func;
 
     func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
         for (size_t i = 0; i < vec.nr(); ++i) {
-            jsFunction.call<void>("setArg", i, vec(i)); // Push each arg into the js args array
+            jsFunction.call<void>("setArg", i, vec(i));
         }
-        return jsFunction.call<double>("bang"); // Evaluate the function and reeturn the value
+        return jsFunction.call<double>("bang");
     };
 
-    // Convert vector bounds to dlib matrices
     dlib::matrix<double, 0, 1> lb = js_array_to_dlib_mat(lower_bounds);
     dlib::matrix<double, 0, 1> ub = js_array_to_dlib_mat(upper_bounds);
 
-    auto result = dlib::find_min_global(func, lb, ub, max_function_calls(max_calls)); // Call Dlib's find_min_global with max_function_calls
+    auto result = dlib::find_min_global(func, lb, ub, max_function_calls(max_calls));
 
     emscripten::val output_js_object = emscripten::val::object();
     emscripten::val x_js_array = dlib_mat_to_js_array(result.x);
@@ -171,13 +170,6 @@ emscripten::val max_lipo_plus_tr(val jsFunction,
     return output_js_object;
 }
 
-// Entry point for the WebAssembly module
-int main() {
-    std::cout << "WebAssembly module loaded successfully!" << std::endl;
-    return 0;
-}
-
-// Binding the function for WebAssembly
 EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
     function("max_lipo_plus_tr", &max_lipo_plus_tr);
 }
