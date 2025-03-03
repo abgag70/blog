@@ -143,7 +143,7 @@ dlib::matrix<double, 0, 1> js_array_to_dlib_mat(const emscripten::val& js_array)
     return vec;
 }
 
-emscripten::val max_lipo_plus_tr(val jsFunction,
+emscripten::val max_lipo_plus_tr(emscripten::val jsFunction,
                      emscripten::val lower_bounds, // bounds are Javascript Arrays
                      emscripten::val upper_bounds,
                      size_t max_calls) {
