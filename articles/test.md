@@ -84,7 +84,7 @@ export async function maxLipoPlusTr(theFunction,
     // Create an instance of JsFunction with the Rosenbrock function
     const jsFunc = new JsFunction(theFunction);
 
-    const result = await Module.max_lipo_plus_tr(jsFunc, lowerBounds, upperBounds, max_Calls);
+    const result = await Module.max_lipo_plus_tr(jsFunc, lowerBounds, upperBounds, maxCalls);
 
     return { x: result.x, y: result.y };
 }
