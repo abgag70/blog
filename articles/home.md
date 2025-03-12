@@ -6,7 +6,7 @@
 ---
 <br>
 
-## [Introducing <span style="color:#F6AA1C;font-weight:bold;">Lit</span><span style="color:#171717;font-weight:bold;">Lit</span>💡 : a lightweight, free and online RAW image editor](https://littone.pages.dev)
+## [Introducing <span style="color:#F6AA1C;font-weight:bold;">Lit</span><span style="color:#171717;font-weight:bold;">Tone</span>💡 : a lightweight, free and online RAW image editor](https://littone.pages.dev)
 <br>
 
 
