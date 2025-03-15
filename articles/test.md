@@ -70,22 +70,15 @@ Here's ```max-lipo-plus-tr.js```.
 ```js
 import createMaxLipoTrPlusModule from './find_min_global_o3.js'
 
-var Module = null;
+var MaxLipoTrPlusModule = null;
 
-export async function maxLipoPlusTr(theFunction,
-                                    lowerBounds,
-                                    upperBounds,
-                                    maxCalls) { 
-
-    if (!Module) { // load Module if not loaded yet
+export async function maxLipoPlusTr(theFunc, lowerBounds, upperBounds, maxCalls) { 
+    // load module if not loaded yet
+    if (!MaxLipoTrPlusModule) {
         Module = await createMaxLipoTrPlusModule();
     }
-
-    // Create an instance of JsFunction with the Rosenbrock function
-    const jsFunc = new JsFunction(theFunction);
-
+    const jsFunc = new JsFunction(theFunc);
     const result = await Module.max_lipo_plus_tr(jsFunc, lowerBounds, upperBounds, maxCalls);
-
     return { x: result.x, y: result.y };
 }
 ```
@@ -189,7 +182,7 @@ func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
 };
 ```
 
-DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function, encapsulated inside the ```jsFunction``` variable, to a C++ function, which is why we need to introduce a lambda, defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
+DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function encapsulated inside the ```jsFunction``` variable to a C++ function, which is why we need to introduce a lambda defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
 
 #### Compiling to WASM
 
