@@ -147,6 +147,7 @@ emscripten::val max_lipo_plus_tr(emscripten::val jsFunction,
                      emscripten::val lower_bounds, // bounds are Javascript Arrays
                      emscripten::val upper_bounds,
                      size_t max_calls) {
+
     std::function<double(const dlib::matrix<double, 0, 1>&)> func;
 
     func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
@@ -174,6 +175,21 @@ EMSCRIPTEN_BINDINGS(max_lipo_tr_plus_module) {
     function("max_lipo_plus_tr", &max_lipo_plus_tr);
 }
 ```
+
+All of the above C++ code is pretty straightforward, except maybe the following segment, which is where the magic happens and deserves more detailed attention.
+
+```cpp
+std::function<double(const dlib::matrix<double, 0, 1>&)> func;
+
+    func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
+        for (size_t i = 0; i < vec.nr(); ++i) {
+            jsFunction.call<void>("setArg", i, vec(i));
+        }
+        return jsFunction.call<double>("bang");
+    };
+```
+
+DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function, encapsulated inside the ```jsFunction``` variable, to a C++ function, which is why we need to introduce a lambda, defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures the variable ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
 
 #### Compiling to WASM
 
