@@ -184,8 +184,8 @@ std::function<double(const dlib::matrix<double, 0, 1>&)> func;
 func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
     for (size_t i = 0; i < vec.nr(); ++i) {
         jsFunction.call<void>("setArg", i, vec(i));
-        }
-        return jsFunction.call<double>("bang");
+    }
+    return jsFunction.call<double>("bang");
 };
 ```
 
