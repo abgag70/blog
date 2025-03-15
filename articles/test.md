@@ -189,7 +189,7 @@ func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
 };
 ```
 
-DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function, encapsulated inside the ```jsFunction``` variable, to a C++ function, which is why we need to introduce a lambda, defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures the variable ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
+DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function, encapsulated inside the ```jsFunction``` variable, to a C++ function, which is why we need to introduce a lambda, defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
 
 #### Compiling to WASM
 
