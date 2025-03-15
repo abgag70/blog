@@ -1,5 +1,5 @@
 
-## [Playing tricks on Javascript : Float16 matrix multiplication in WebGPU]()
+## [Playing tricks on Javascript : float16 matrix multiplication in WebGPU]()
 
 Quarterway through my life’s journey, I went astray from the straight road and awoke to find myself alone in a dark wood, trying to render a large RAW image in WebGPU.
 
