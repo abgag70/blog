@@ -6,6 +6,21 @@ RAW images have a dynamic range that extends beyond the traditionnal 8 bit, gene
 
 #### Whats's currently possible ?
 
-The first solution I implemented was just to parse the RAW image in uint16 and cast every value to float32. It takes double the size and it's slow, but it works. Rendering usually happens in three of four passes :
+The first solution I implemented was just to parse the RAW image in uint16 and cast every value to float32. It takes double the size and it's slow, but it works. Rendering usually happens in three of four passes. Here are the steps :
 
-1. The RAW image is decoded into a Javascript ```Uint16Array```, then cast into a 
+1. The RAW image is first decoded into a Javascript ```Uint16Array```.
+   
+2. The array is cast into a ```Float32Array```, so every value encoded is converted to its 32bit floating point representatation (modern Javascript is JIT-compiled and incredibly optimized so a simple for loop shall do).
+
+```js
+rawImage = new Uint16Array([1, 2, 3, 4, 65535]);
+let f32RawImage = new Float32Array(rawImage.length);
+
+for (let i = 0; i < f32RawImage.length; i++) {
+    f32RawImage[i] = rawImage[i];
+}
+```
+
+4. This new ```Float32Array``` is then passed to the GPU buffer.
+   
+
