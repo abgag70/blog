@@ -23,8 +23,23 @@ for (let i = 0; i < f32RawImage.length; i++) {
 
 3. This new ```Float32Array``` is then passed to the GPU buffer, which maps nicely to the ```array<f32>``` WGSL type.
 
-**Why not cast to a ```Uint8Array```?** : even if the values of the image (and every image) are squashed to an 8 bit dynamic range when displayed on a screen, we need to keep the full 16 bit dynamic for image processing, before any rendering on a screen happens.
 
-**Why not just keep the ```Uint16Array```?** : WebGPU has no compatible integer type (so ```u16``` doesn't exist in WGSL). 
+**Why not just keep the ```Uint16Array``` ?** : WebGPU has no compatible integer type (so ```u16``` doesn't exist in WGSL). 
+
+**Why not cast to a ```Uint8Array``` ?** : even if the values of the image (and every image) are squashed to an 8 bit dynamic range when displayed on a screen, we need to keep the full 16 bit dynamic for image processing on the GPU, before any rendering on a screen happens.
+
+**Why not cast to a ```Float16Array``` ?** : Great question ! The ```Float16Array``` is [a valid Javascript type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float16Array) however it is still not implemented in Google Chrome and Chromium based browser (Edge, Opera, etc.). It is only implemented inside Safari and Firefox at the moment. 
+
+As for WebGPU, it's currently only supported inside Chromium based browsers, not supported inside Firefox, and has beta support inside Safari.
+
+Go figure 🙃
+
+That means that to be able to pass 16 bit floating point values to WebGPU as an ```array<f16>```, we're gonna have to roll out our own ```Float16Array``` type that extends the regular ```Uint16Array``` type and that we'll soberly call ```Float16ArrayLike```.
+
+The rest of this article will go over the implementation ```Float16ArrayLike``` in Javascript and we'll test it with a simple 4x4 matrix multiplication inside a WebGPU compute shader. It should map nicely with the WGSL  ```array<f16>``` type.
+
+I expect this article to be made redundant once Chrome rolls out the ```Float16Array``` type, but this is still a fun exercise to do in the meantime anyway.
+
+
 
 <br/>
