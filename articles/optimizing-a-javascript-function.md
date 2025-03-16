@@ -70,11 +70,11 @@ Here's ```max-lipo-plus-tr.js```.
 ```js
 import createMaxLipoTrPlusModule from './find_min_global_o3.js'
 
-var MaxLipoTrPlusModule = null;
+var Module = null;
 
 export async function maxLipoPlusTr(theFunc, lowerBounds, upperBounds, maxCalls) { 
     // load module if not loaded yet
-    if (!MaxLipoTrPlusModule) {
+    if (!Module) {
         Module = await createMaxLipoTrPlusModule();
     }
     const jsFunc = new JsFunction(theFunc);
