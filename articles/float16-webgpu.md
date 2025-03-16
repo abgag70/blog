@@ -10,10 +10,10 @@ The first solution I implemented was just to parse the RAW image in uint16 and c
 
 1. The RAW image is first decoded into a Javascript ```Uint16Array```.
    
-2. The array is cast into a ```Float32Array```, so every value encoded is converted to its 32bit floating point representatation (modern Javascript is JIT-compiled and incredibly optimized so a simple for loop shall do).
+2. The array is cast into a ```Float32Array```, so every value is converted to its 32bit floating point representatation (modern Javascript is JIT-compiled and incredibly optimized so a simple for loop shall do).
 
 ```js
-rawImage = new Uint16Array([1, 2, 3, 4, 65535]);
+let rawImage = new Uint16Array([0, 1, 2, 3, 4, 65535]);
 let f32RawImage = new Float32Array(rawImage.length);
 
 for (let i = 0; i < f32RawImage.length; i++) {
@@ -21,6 +21,10 @@ for (let i = 0; i < f32RawImage.length; i++) {
 }
 ```
 
-4. This new ```Float32Array``` is then passed to the GPU buffer.
-   
+3. This new ```Float32Array``` is then passed to the GPU buffer, which maps nicely to the ```array<f32>``` WGSL type.
 
+**Why not cast to a ```Uint8Array```?** : even if the values of the image (and every image) are squashed to an 8 bit dynamic range when displayed on a screen, we need to keep the full 16 bit dynamic for image processing, before any rendering on a screen happens.
+
+**Why not just keep the ```Uint16Array```?** : WebGPU has no compatible integer type (so ```u16``` doesn't exist in WGSL). 
+
+<br/>
