@@ -1,4 +1,3 @@
-optimizing-a-javascript-function-with-dlibs-maxlipotr-global-optimization-algorithm-using-emscripten-and-wasm/index.html<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,6 +53,22 @@ optimizing-a-javascript-function-with-dlibs-maxlipotr-global-optimization-algori
             }
         }
     </style>
+
+<style>
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 5px;
+      justify-content: center;
+      margin: 10px auto;
+    }
+    .matrix input {
+      text-align: center;
+      padding: .375rem .75rem;
+      width: 80px;
+      height: 40px;
+    }
+  </style>
 </head>
 
 <body class="inconsolata bg-light">
@@ -104,6 +119,97 @@ optimizing-a-javascript-function-with-dlibs-maxlipotr-global-optimization-algori
             </div>
         </div>
     </div>
+    <div class="container mt-5">
+        <form method="post" action="">
+          <div class="row justify-content-center">
+            <!-- Matrix A -->
+            <div class="col-3">
+              <h4 class="text-center">Matrix A</h4>
+              <div class="matrix">
+                <!-- Generate 16 input boxes for Matrix A -->
+                <input type="number" name="A00" required>
+                <input type="number" name="A01" required>
+                <input type="number" name="A02" required>
+                <input type="number" name="A03" required>
+                <input type="number" name="A10" required>
+                <input type="number" name="A11" required>
+                <input type="number" name="A12" required>
+                <input type="number" name="A13" required>
+                <input type="number" name="A20" required>
+                <input type="number" name="A21" required>
+                <input type="number" name="A22" required>
+                <input type="number" name="A23" required>
+                <input type="number" name="A30" required>
+                <input type="number" name="A31" required>
+                <input type="number" name="A32" required>
+                <input type="number" name="A33" required>
+              </div>
+            </div>
+    
+            <!-- Multiplication Symbol -->
+            <div class="col-1 d-flex align-items-center justify-content-center">
+              <h1>&times;</h1>
+            </div>
+    
+            <!-- Matrix B -->
+            <div class="col-3">
+              <h4 class="text-center">Matrix B</h4>
+              <div class="matrix">
+                <!-- Generate 16 input boxes for Matrix B -->
+                <input type="number" name="B00" required>
+                <input type="number" name="B01" required>
+                <input type="number" name="B02" required>
+                <input type="number" name="B03" required>
+                <input type="number" name="B10" required>
+                <input type="number" name="B11" required>
+                <input type="number" name="B12" required>
+                <input type="number" name="B13" required>
+                <input type="number" name="B20" required>
+                <input type="number" name="B21" required>
+                <input type="number" name="B22" required>
+                <input type="number" name="B23" required>
+                <input type="number" name="B30" required>
+                <input type="number" name="B31" required>
+                <input type="number" name="B32" required>
+                <input type="number" name="B33" required>
+              </div>
+            </div>
+            <!-- Multiplication Symbol -->
+            <div class="col-1 d-flex align-items-center justify-content-center mx-0">
+                <h1>&equals;</h1>
+              </div>
+
+            <!-- Matrix c -->
+            <div class="col-3">
+                <h4 class="text-center">Matrix C</h4>
+                <div class="matrix">
+                  <!-- Generate 16 input boxes for Matrix B -->
+                  <input type="number" name="C00" disabled>
+                  <input type="number" name="C01" disabled>
+                  <input type="number" name="C02" disabled>
+                  <input type="number" name="C03" disabled>
+                  <input type="number" name="C10" disabled>
+                  <input type="number" name="C11" disabled>
+                  <input type="number" name="C12" disabled>
+                  <input type="number" name="C13" disabled>
+                  <input type="number" name="C20" disabled>
+                  <input type="number" name="C21" disabled>
+                  <input type="number" name="C22" disabled>
+                  <input type="number" name="C23" disabled>
+                  <input type="number" name="C30" disabled>
+                  <input type="number" name="C31" disabled>
+                  <input type="number" name="C32" disabled>
+                  <input type="number" name="C33" disabled>
+                </div>
+              </div>
+          </div>
+    
+          <!-- Calculate Button -->
+          <br>
+          <br>
+          <br>
+        </form>
+      </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
