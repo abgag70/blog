@@ -1,5 +1,5 @@
 ## [Playing tricks on Javascript : float16 matrix multiplication in WebGPU]()
-<sub>March 16th 2025</sub>
+<sub>March 17th 2025</sub>
 <br>
 
 ##### [Try it out here](https://dany-demise.github.io/float16-webgpu/)
