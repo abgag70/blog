@@ -1,4 +1,8 @@
 ## [Playing tricks on Javascript : float16 matrix multiplication in WebGPU]()
+<sub>March 16th 2025</sub>
+<br>
+
+##### [Try it out here](https://dany-demise.github.io/float16-webgpu/)
 
 Quarterway through my life’s journey, I went astray from the straight road and awoke to find myself alone in a dark wood, trying to render a large RAW image in WebGPU. I thought I found salvation once I learned that the WebGPU Shading Language (WGSL) committee had approved the ```f16``` type, but little did I know this would only be the beginning of my torment.  
 
@@ -86,7 +90,7 @@ export class Float16ArrayLike extends Uint16Array {
 }
 ```
  
- Notice we use two util functions : ```castFloat32ToFloat16``` and ```castFloat16ToFloat32```. Since the function names are pretty explicit, I will spare the reader of having to read through these eyesores, but the interested _afficionado_ can find the [full implementation on Github](https://github.com/dany-demise/dany-demise.github.io/blob/main/float16-webgpu/assets/float16-array.js).
+ Notice we use two util functions : ```castFloat32ToFloat16``` and ```castFloat16ToFloat32```. Since the function names are pretty explicit, I will spare the reader of having to read through these eyesores, but the principle is simple. Each time we set a value using the Array brackets operators like ```myF16Array[index] = 0.123456789```, the value Number is first converted to a FLoat32 (if it's not one already) then cast to a FLoat16 ```castFloat32ToFloat16``` and finally inserted into the underlying ```Uint16Array``` as a 16 bit floating point representation of the received float 32 value. The reverse is also true when we get a value using the bracket operators, where ```myValue = myF16Array[index]``` returns the value as a float32 number of the half precision 16 bit representation (so ```0,12347412109375``` in our case). The interested _afficionado_ can find the [full implementation on Github](https://github.com/dany-demise/dany-demise.github.io/blob/main/float16-webgpu/assets/float16-array.js). 
 
  #### Passing the values to WebGPU
  Our ```Float16ArrayLike``` type maps nicely to the ```array<f16>``` WGSL type. Here's a compute shader for a simple 4 x 4 matrix multiplication.
@@ -112,5 +116,11 @@ fn main(@builtin(global_invocation_id) gid : vec3<u32>) {
 
  Notice the ```enable f16;``` on top and the fact that both our read matrices A and B and our written to matrix C are ```array<f16>```. I will again spare all the Javascript to WebGPU pipelining code for the reader, but know that you just need to treat a ```Float16ArrayLike``` exactly as you would a regular ```Float32Array```, as both are ```TypedArray```s.
 
-### Try it out
+And that's pretty much it !
 
+##### [Try it out here](https://dany-demise.github.io/float16-webgpu/)
+
+<br>
+<br>
+<br>
+<br>
