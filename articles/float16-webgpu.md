@@ -94,7 +94,9 @@ export class Float16ArrayLike extends Uint16Array {
 }
 ```
  
- Notice we use two util functions : ```castFloat32ToFloat16``` and ```castFloat16ToFloat32```. Since the function names are pretty explicit, I will spare the reader of having to read through these eyesores, but the principle is simple. Each time we set a value using the Array brackets operators like ```myF16Array[index] = 0.123456789```, the value Number is first converted to a FLoat32 (if it's not one already) then cast to a FLoat16 ```castFloat32ToFloat16``` and finally inserted into the underlying ```Uint16Array``` as a 16 bit floating point representation of the received float 32 value. The reverse is also true when we get a value using the bracket operators, where ```myValue = myF16Array[index]``` returns the value as a float32 number of the half precision 16 bit representation (so ```0,12347412109375``` in our case). The interested _afficionado_ can find the [full implementation on Github](https://github.com/dany-demise/dany-demise.github.io/blob/main/float16-webgpu/assets/float16-array.js). 
+ Notice we use two util functions : ```castFloat32ToFloat16``` and ```castFloat16ToFloat32```. Since the function names are pretty explicit, I will spare the reader of having to read through these eyesores, but the principle is simple. Each time we set a value using the array bracket operator like ```myF16Array[index] = 0.123456789```, the value Number is first converted to a float32 (if it's not one already) then cast to a float16 using ```castFloat32ToFloat16``` and finally inserted into the underlying ```Uint16Array``` as a 16 bit floating point representation of the received float 32 value. 
+ 
+ The reverse is also true when we get a value using the bracket operators, where ```myValue = myF16Array[index]``` returns the value as a float32 number of the half precision 16 bit representation (so ```0,12347412109375``` in our case). The interested _afficionado_ can find the [full implementation on Github](https://github.com/dany-demise/dany-demise.github.io/blob/main/float16-webgpu/assets/float16-array.js). 
 
  <br>
 
