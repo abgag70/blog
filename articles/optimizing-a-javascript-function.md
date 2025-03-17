@@ -32,7 +32,9 @@ y = 0.00000000000000000018
 
 Dlib is written in C++ and offers a Python API. Our goal is to reproduce this behavior in Javascript and be able to minimize a similar function directly inside a browser environnement. For this, a small C++ wrapper around ```dlib::find_min_global``` does the job, allowing us to call a Javascript function directly from a WASM environnement.
 
-#### Setting up the Javascript interface
+<br>
+
+#### **Setting up the Javascript interface**
 
 But first, since the goal is to reproduce this behavior in Javascript, we start by creating a function called ```maxLipoPlusTr``` that will be able to minimize any numerical Javascript function (i.e. that takes in and returns a numerical value). Here's what we want it to look like.
 
@@ -102,7 +104,9 @@ class JsFunction {
 
 The ```setArg``` method, called from the C++ code using Emscripten, allows us to rapidly change the arguments of the function during the optimization process, avoiding unnecessary memory allocations and the need to create an array each time the function is called. Plus, since we know all our values will be of float 32 type, we can use a ```FLoat32Array``` created with a fixed length. This allows us to benefit from the fact that a Javascript ```TypedArray``` uses contiguous memory allocation by default.
 
-#### Writing a C++ wrapper
+<br>
+
+#### **Writing a C++ wrapper**
 
 Once our Javascript is set up, we create a C++ wrapper to interact with dlib and compile it using Emscripten to make it accessible inside a web environnement.
 
@@ -184,7 +188,9 @@ func = [jsFunction](const dlib::matrix<double, 0, 1>& vec) -> double {
 
 DLib's ```find_min_global``` expects to receive a C++ function as argument, so we need a way to "cast" our Javascript function encapsulated inside the ```jsFunction``` variable to a C++ function, which is why we need to introduce a lambda defined as the ```func``` variable with ```std::function<...>```. Then, ```[jsFunction]``` inside the lambda’s brackets captures ```jsFunction``` from the outer scope so that it can be used inside the lambda body at every iteration of the optimization.
 
-#### Compiling to WASM
+<br>
+
+#### **Compiling to WASM**
 
 To compile ```find_min_global_wrapper.cpp``` to our imported ```find_min_global_o3.js```, the following does the job. Notice multi-threading is deactivated by default, but it should work if one was to activate multi-threading with ```-s USE_PTHREADS=1```.
 
