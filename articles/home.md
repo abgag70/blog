@@ -1,4 +1,4 @@
-## [Playing tricks on Javascript : float16 matrix multiplication in WebGPU](https://dany-demise.github.io/blog/playing-tricks-on-javascript-float16-matrix-multiplication-in-webgpu)
+## [Playing tricks on Javascript : float16 matrix multiplication in WebGPU 🔢](https://dany-demise.github.io/blog/playing-tricks-on-javascript-float16-matrix-multiplication-in-webgpu)
 March 17th 2025
 <br>
 <br>
