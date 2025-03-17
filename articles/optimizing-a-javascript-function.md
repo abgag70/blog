@@ -205,8 +205,8 @@ And that's it !
 
 You can try it out [here](https://dany-demise.github.io/max-lipo-plus-tr-js) and get the code [here](https://github.com/dany-demise/max-lipo-plus-tr-js).
 
-⚠️ I'm currently using Emscripten 3.1.74 because of a [compiling issue](https://github.com/davisking/dlib/issues/3045) with version 4.0.0.
 
 
 
+<br>
 <br>
