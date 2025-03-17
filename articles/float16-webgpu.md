@@ -8,7 +8,9 @@ Quarterway through my life’s journey, I went astray from the straight road and
 
 RAW images have a dynamic range that extends beyond the traditionnal 8 bit, generally 16 bit unsigned integers, and thus allow for rich photo editing. Parsing a RAW image, passing it to the GPU and rendering it is usually pretty straigthforward to do in a native app. But since WebGPU is a relatively new technology, it doesn't currently offer this flexibility and rendering 16 bit images in the browser presents some challenges.
 
-#### Whats's currently possible ?
+<br>
+
+#### **Whats's currently possible ?**
 
 The first solution I implemented was just to parse the RAW image in uint16 and cast every value to float32. It takes double the size and it's slow, but it works. Rendering usually happens in three of four passes. Here are the steps :
 
@@ -45,7 +47,9 @@ The rest of this article will go over the implementation ```Float16ArrayLike``` 
 
 I expect this article to be made redundant once Chrome rolls out the ```Float16Array``` type, but this is still a fun exercise to do in the meantime anyway.
 
-#### The ```Float16ArrayLike``` type
+<br>
+
+#### **The ```Float16ArrayLike``` type**
 
 The ```Float16ArrayLike``` type that we're implementing : 
 
@@ -92,7 +96,9 @@ export class Float16ArrayLike extends Uint16Array {
  
  Notice we use two util functions : ```castFloat32ToFloat16``` and ```castFloat16ToFloat32```. Since the function names are pretty explicit, I will spare the reader of having to read through these eyesores, but the principle is simple. Each time we set a value using the Array brackets operators like ```myF16Array[index] = 0.123456789```, the value Number is first converted to a FLoat32 (if it's not one already) then cast to a FLoat16 ```castFloat32ToFloat16``` and finally inserted into the underlying ```Uint16Array``` as a 16 bit floating point representation of the received float 32 value. The reverse is also true when we get a value using the bracket operators, where ```myValue = myF16Array[index]``` returns the value as a float32 number of the half precision 16 bit representation (so ```0,12347412109375``` in our case). The interested _afficionado_ can find the [full implementation on Github](https://github.com/dany-demise/dany-demise.github.io/blob/main/float16-webgpu/assets/float16-array.js). 
 
- #### Passing the values to WebGPU
+ <br>
+
+ #### **Passing the values to WebGPU**
  Our ```Float16ArrayLike``` type maps nicely to the ```array<f16>``` WGSL type. Here's a compute shader for a simple 4 x 4 matrix multiplication.
 
  ```wgsl
