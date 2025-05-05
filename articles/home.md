@@ -3,3 +3,7 @@ January 18th 2025
 <br>
 <br>
 
+## [The library 📚](https://dany-demise.github.io/blog/the-library)
+A collection of great articles I've read over the years
+<br>
+<br>
