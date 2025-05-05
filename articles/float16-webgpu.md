@@ -2,6 +2,8 @@
 <sub>March 17th 2025</sub>
 <br>
 
+⚠️ - The following is **extremely slow** and serves more as a toy implementation to see where the limit of Javascript are. A WASM implementation that takes in a ```Float32Array``` and simply returns an allocated ```UInt16Array``` provides a significant speed up.
+
 ##### [Try it out here](https://dany-demise.github.io/float16-webgpu/)
 
 Quarterway through my life’s journey, I went astray from the straight road and awoke to find myself alone in a dark wood, trying to render a large RAW image in WebGPU. I thought I found salvation once I learned that the WebGPU Shading Language (WGSL) committee had approved the ```f16``` type, but little did I know this would only be the beginning of my torment.  
