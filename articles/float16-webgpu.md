@@ -4,7 +4,7 @@
 
 ⚠️ - The following is **extremely slow** and serves more as a toy implementation to see where the limit of Javascript are. Our ```castFloat32ToFloat16``` and ```castFloat16ToFloat32``` needs to make a lot of allocations for this to work, and the Javascript ```Proxy```, which we need for operator overriding like behavior, is painfully slow.
 
-A WASM implementation that takes in a ```Float32Array``` and simply returns an allocated ```UInt16Array``` provides a significant speed up.
+A WASM implementation that takes in a ```Float32Array``` and simply returns an allocated ```UInt16Array``` provides a ~80x speed up.
 
 ##### [Try it out here](https://dany-demise.github.io/float16-webgpu/)
 
