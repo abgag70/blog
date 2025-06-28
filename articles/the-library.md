@@ -4,3 +4,6 @@
 [Coping strategies for the serial project hoarder](https://simonwillison.net/2022/Nov/26/productivity/)\
 <sub>Simon Willison</sub>
 
+[TPU Deep Dive](https://henryhmko.github.io/posts/tpu/tpu.html)\
+<sub>Henry Ko</sub>
+
