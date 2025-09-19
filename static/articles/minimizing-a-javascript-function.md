@@ -1,4 +1,4 @@
-## [Optimizing a Javascript function with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM]()
+## [Minimizing a Javascript function with DLib's MaxLIPO+TR global optimization algorithm using Emscripten and WASM]()
 <sub>January 18th 2025 </sub>
 <br>
 
